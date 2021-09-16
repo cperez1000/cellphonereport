@@ -73,6 +73,6 @@ client_secrets.json
 /nbdist/
 /.nb-gradle/
 /build/
-
+*.iml
 application-*.*
 !application-local.*

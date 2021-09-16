@@ -1,9 +1,0 @@
-org/tryout/model/CellPhoneUsagePerDay.class
-org/tryout/service/BaseService.class
-org/tryout/repository/CellPhoneUsageRepository.class
-org/tryout/Application.class
-org/tryout/service/CellPhoneService.class
-org/tryout/model/CellPhoneUsagePerMonth.class
-org/tryout/repository/CellPhoneRepository.class
-org/tryout/model/CellPhone.class
-org/tryout/service/CellPhoneUsageByMonthService.class

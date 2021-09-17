@@ -1,12 +1,11 @@
 package org.tryout.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.tryout.model.*;
+import org.tryout.model.jasper.EmployeeCellPhoneUsageHistory;
+import org.tryout.model.jasper.UsageHistoryEntry;
 import org.tryout.repository.CellPhoneUsageRepository;
 
 import java.math.BigDecimal;
@@ -38,15 +37,15 @@ public class CellPhoneUsageService implements BaseService<CellPhoneUsagePerDay> 
     }
 
     public BigDecimal getTotalData() {
-        return repository.getTotalData().setScale(2, RoundingMode.HALF_UP);
+        return repository.getTotalData().setScale(3, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getAverageMinutes() {
-        return repository.getAverageMinutes().setScale(2, RoundingMode.HALF_UP);
+        return repository.getAverageMinutes().setScale(3, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getAverageData() {
-        return repository.getAverageData().setScale(2, RoundingMode.HALF_UP);
+        return repository.getAverageData().setScale(3, RoundingMode.HALF_UP);
     }
 
     public List<CellPhoneUsagePerMonth> listCellPhoneUsagePerMonth() {

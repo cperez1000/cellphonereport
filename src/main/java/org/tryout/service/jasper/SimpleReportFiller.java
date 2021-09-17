@@ -1,22 +1,18 @@
-//taken from https://github.com/eugenp/tutorials/blob/master/libraries-2/src/main/java/com/baeldung/jasperreports
+//most of this was taken from https://github.com/eugenp/tutorials/blob/master/libraries-2/src/main/java/com/baeldung/jasperreports
 
-package org.tryout.report;
+package org.tryout.service.jasper;
 
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRSaver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.sql.DataSource;
 import java.io.InputStream;
-import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 @Component
 public class SimpleReportFiller {
@@ -33,11 +29,6 @@ public class SimpleReportFiller {
 
     public SimpleReportFiller() {
         parameters = new HashMap<>();
-    }
-
-    public void prepareReport() {
-        compileReport();
-        fillReport();
     }
 
     public void compileReport() {
@@ -58,16 +49,8 @@ public class SimpleReportFiller {
         }
     }
 
-    public Collection<?> getBeansCollection() {
-        return beansCollection;
-    }
-
     public void setBeansCollection(Collection<?> beansCollection) {
         this.beansCollection = beansCollection;
-    }
-
-    public Map<String, Object> getParameters() {
-        return parameters;
     }
 
     public void setParameters(Map<String, Object> parameters) {

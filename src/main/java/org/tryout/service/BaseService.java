@@ -18,6 +18,4 @@ public interface BaseService<T> {
     }
 
     CrudRepository<T, Long>  getRepository();
-
-
 }

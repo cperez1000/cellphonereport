@@ -1,6 +1,7 @@
-package org.tryout.model;
+package org.tryout.model.jasper;
 
 import lombok.*;
+import org.tryout.model.EmployeeCellPhone;
 
 import java.util.List;
 

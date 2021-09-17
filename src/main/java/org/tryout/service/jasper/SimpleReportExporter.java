@@ -1,8 +1,9 @@
-//taken from https://github.com/eugenp/tutorials/blob/master/libraries-2/src/main/java/com/baeldung/jasperreports
+//except for #sendToPrinter method, most of this was taken from https://github.com/eugenp/tutorials/blob/master/libraries-2/src/main/java/com/baeldung/jasperreports
 
-package org.tryout.report;
+package org.tryout.service.jasper;
 
-import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.export.*;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.export.*;
@@ -10,13 +11,10 @@ import org.springframework.stereotype.Component;
 
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
-import javax.print.attribute.AttributeSet;
 import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.HashPrintServiceAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
 import javax.print.attribute.standard.MediaSizeName;
-import javax.print.attribute.standard.PrinterName;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
 import java.util.logging.Level;
@@ -50,30 +48,28 @@ public class SimpleReportExporter {
 
         PrintService defaultPrintService = PrintServiceLookup.lookupDefaultPrintService();
 
-        try {
-            printerJob.setPrintService(defaultPrintService);
-
-        } catch (Exception e) {
-
-            Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, e);
-        }
-        JRPrintServiceExporter exporter;
         PrintRequestAttributeSet printRequestAttributeSet = new HashPrintRequestAttributeSet();
         printRequestAttributeSet.add(MediaSizeName.NA_LETTER);
         printRequestAttributeSet.add(new Copies(1));
 
-        // these are deprecated
-        exporter = new JRPrintServiceExporter();
+        JRPrintServiceExporter exporter = new JRPrintServiceExporter();
 
-        exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-        exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, defaultPrintService);
-        exporter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE_ATTRIBUTE_SET, defaultPrintService.getAttributes());
-        exporter.setParameter(JRPrintServiceExporterParameter.PRINT_REQUEST_ATTRIBUTE_SET, printRequestAttributeSet);
-        exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PAGE_DIALOG, Boolean.FALSE);
-        exporter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, Boolean.FALSE);
+        exporter.setExporterInput(new SimpleExporterInput(jasperPrint));
+
+        SimplePrintServiceExporterConfiguration printConfig = new SimplePrintServiceExporterConfiguration();
+        printConfig.setPrintService(defaultPrintService);
+        printConfig.setPrintServiceAttributeSet(defaultPrintService.getAttributes());
+        printConfig.setPrintRequestAttributeSet(printRequestAttributeSet);
+        printConfig.setDisplayPageDialog(false);
+        printConfig.setDisplayPrintDialog(false);
+
+        exporter.setConfiguration(printConfig);
+
         try {
+
+            printerJob.setPrintService(defaultPrintService);
             exporter.exportReport();
-        } catch (JRException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(SimpleReportFiller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -111,7 +107,7 @@ public class SimpleReportExporter {
         exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(fileName));
 
         SimpleXlsxReportConfiguration reportConfig = new SimpleXlsxReportConfiguration();
-        reportConfig.setSheetNames(new String[] { sheetName });
+        reportConfig.setSheetNames(new String[]{sheetName});
 
         exporter.setConfiguration(reportConfig);
 

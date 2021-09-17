@@ -1,4 +1,4 @@
-package org.tryout.model;
+package org.tryout.model.jasper;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

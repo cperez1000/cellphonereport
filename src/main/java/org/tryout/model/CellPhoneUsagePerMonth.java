@@ -5,15 +5,14 @@ import lombok.*;
 import java.math.BigDecimal;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Getter
 @EqualsAndHashCode
 public class CellPhoneUsagePerMonth {
-    private CellPhone cellPhone;
-    private Integer year;
-    private Integer month;
-    private Long totalMinutes;
-    private BigDecimal totalData;
-    private Long count;
+    private final EmployeeCellPhone employeeCellPhone;
+    private final Integer year;
+    private final Integer month;
+    private final Long totalMinutes;
+    private final BigDecimal totalData;
+    private final Long count;
 }

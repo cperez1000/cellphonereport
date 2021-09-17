@@ -23,7 +23,7 @@ public class CellPhoneUsagePerDay {
             name = "employeeId",
             referencedColumnName = "employeeId"
     )
-    private CellPhone cellPhone;
+    private EmployeeCellPhone employeeCellPhone;
 
     private LocalDate date;
     private Long totalMinutes;

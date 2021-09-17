@@ -23,14 +23,14 @@ public interface CellPhoneUsageRepository extends CrudRepository<CellPhoneUsageP
     BigDecimal getAverageData();
 
     @Query("select new org.tryout.model.CellPhoneUsagePerMonth(" +
-            "c.cellPhone, " +
+            "c.employeeCellPhone, " +
             "extract(YEAR from c.date) AS year, " +
             "extract(MONTH from c.date) AS month, " +
             "SUM(c.totalMinutes), " +
             "SUM(c.totalData), " +
             "count(id)) " +
             "FROM CellPhoneUsagePerDay c " +
-            "group by c.cellPhone, year, month"
+            "group by c.employeeCellPhone, year, month"
     )
     Iterable<CellPhoneUsagePerMonth> listCellPhoneUsagePerMonth();
 

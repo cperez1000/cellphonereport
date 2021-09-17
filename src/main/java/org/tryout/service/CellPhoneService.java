@@ -18,4 +18,8 @@ public class CellPhoneService implements BaseService {
     public CellPhoneRepository getRepository() {
         return repository;
     }
+
+    public long getCount() {
+        return repository.count();
+    }
 }

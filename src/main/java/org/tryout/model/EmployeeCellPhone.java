@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Getter
 @EqualsAndHashCode
 @Table(name = "cell_phones")
-public class CellPhone {
+public class EmployeeCellPhone {
     @Id
     private Long employeeId;
 

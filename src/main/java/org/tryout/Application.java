@@ -46,7 +46,7 @@ public class Application {
 
             simpleReportExporter.setJasperPrint(simpleReportFiller.getJasperPrint());
 
-            simpleReportExporter.exportToPdf("employeeReport.pdf", "Carlos Perez");
+            simpleReportExporter.exportToPdf("CellPhoneReport.pdf", "Carlos Perez");
             simpleReportExporter.sendToPrinter();
 
         };
